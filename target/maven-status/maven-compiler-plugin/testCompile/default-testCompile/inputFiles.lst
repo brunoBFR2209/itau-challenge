@@ -1,0 +1,10 @@
+C:\Users\Bruno\Documents\desenvovimento\port\itau-challenge\src\test\java\com\challenge\pet\love\app\api\LocationControllerTest.java
+C:\Users\Bruno\Documents\desenvovimento\port\itau-challenge\src\test\java\com\challenge\pet\love\app\dto\LocationResponseDTOTest.java
+C:\Users\Bruno\Documents\desenvovimento\port\itau-challenge\src\test\java\com\challenge\pet\love\app\service\LocationServiceImplTest.java
+C:\Users\Bruno\Documents\desenvovimento\port\itau-challenge\src\test\java\com\challenge\pet\love\domain\LocationUseCaseImplTest.java
+C:\Users\Bruno\Documents\desenvovimento\port\itau-challenge\src\test\java\com\challenge\pet\love\infra\clients\PositionStackClientTest.java
+C:\Users\Bruno\Documents\desenvovimento\port\itau-challenge\src\test\java\com\challenge\pet\love\infra\config\RestTemplateConfigTest.java
+C:\Users\Bruno\Documents\desenvovimento\port\itau-challenge\src\test\java\com\challenge\pet\love\infra\dataprovider\PositionStackDataProviderImplTest.java
+C:\Users\Bruno\Documents\desenvovimento\port\itau-challenge\src\test\java\com\challenge\pet\love\infra\dto\PositionStackLocationDTOTest.java
+C:\Users\Bruno\Documents\desenvovimento\port\itau-challenge\src\test\java\com\challenge\pet\love\infra\dto\PositionStackResponseDTOTest.java
+C:\Users\Bruno\Documents\desenvovimento\port\itau-challenge\src\test\java\com\challenge\pet\love\infra\handler\CustomHandlerTest.java

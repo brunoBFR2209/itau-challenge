@@ -1,0 +1,13 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api-location-finder
+
+spring:
+  main:
+    banner-mode: 'console'
+
+app:
+  client:
+    location: http://api.positionstack.com/v1/reverse
+  key: 781bdd874c689ba86ffdb3f1ed684791

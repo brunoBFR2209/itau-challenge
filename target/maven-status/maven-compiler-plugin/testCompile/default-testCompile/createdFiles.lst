@@ -1,0 +1,12 @@
+com\challenge\pet\love\infra\clients\PositionStackClientTest.class
+com\challenge\pet\love\domain\LocationUseCaseImplTest.class
+com\challenge\pet\love\infra\config\RestTemplateConfigTest$TestConfig.class
+com\challenge\pet\love\infra\handler\CustomHandlerTest$1SpecificBusinessException.class
+com\challenge\pet\love\infra\handler\CustomHandlerTest.class
+com\challenge\pet\love\app\api\LocationControllerTest.class
+com\challenge\pet\love\infra\config\RestTemplateConfigTest.class
+com\challenge\pet\love\infra\dto\PositionStackResponseDTOTest.class
+com\challenge\pet\love\app\dto\LocationResponseDTOTest.class
+com\challenge\pet\love\app\service\LocationServiceImplTest.class
+com\challenge\pet\love\infra\dto\PositionStackLocationDTOTest.class
+com\challenge\pet\love\infra\dataprovider\PositionStackDataProviderImplTest.class
