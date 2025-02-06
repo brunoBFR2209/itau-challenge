@@ -33,3 +33,5 @@ Este projeto utiliza a especificação OpenAPI para documentação e catálogo d
 Visando otimizar a aplicação para o presente e o futuro, implementei uma arquitetura hexagonal, segregando a lógica de negócios das camadas de interação externa (entrada e provedores de dados).
 Essa abordagem facilita a inclusão de novas regras de negócios, que podem ser adicionadas diretamente na camada de domínio, com ajustes pontuais nas camadas de interação externa (Providers e App), caso necessário.
 Usei o padrão de projeto Builder na construção do objeto de retorno, conferindo maior flexibilidade e manutenibilidade ao código.
+
+Uma melhoria seria criar um hashMap para armazenar as buscas anteriores em cache e não fazer requisições desncessarias e tambem mantemos um historico do caminho do pet dessa forma.
