@@ -1,7 +1,7 @@
 
 # Itau Challenge - Insurance API
 
-A proposta dessa aplicação é retornar a localizacao(endereço, bairro, cidade, pais e endereço) do pet de acordo com os parametros enviados 
+A proposta dessa aplicação é retornar a localização (endereço, bairro, cidade, pais e endereço) do pet de acordo com os parametros enviados.
 
 ## Tecnologias
 Java, SpringBoot, Docker
@@ -30,6 +30,6 @@ Este projeto utiliza a especificação OpenAPI para documentação e catálogo d
 
 ## Solução
 
-Para melhor atender o objetivo da aplicação atual e futuro, utilizei uma arquitetura hexagonal, separando a regra de negocio da camada de entrada e providenciador dos dados.
-Dessa forma, caso seja necessario adicao de novas regras de negocio basta adicionar na camada de dominio, e fazer, se nescessario ajustes pontuais nas camadas de interação externa(Providers e App).
-Usei um padrao criacional (Builder) para preparar o objeto de retorno.
+Visando otimizar a aplicação para o presente e o futuro, implementei uma arquitetura hexagonal, segregando a lógica de negócios das camadas de interação externa (entrada e provedores de dados).
+Essa abordagem facilita a inclusão de novas regras de negócios, que podem ser adicionadas diretamente na camada de domínio, com ajustes pontuais nas camadas de interação externa (Providers e App), caso necessário.
+Usei o padrão de projeto Builder na construção do objeto de retorno, conferindo maior flexibilidade e manutenibilidade ao código.
