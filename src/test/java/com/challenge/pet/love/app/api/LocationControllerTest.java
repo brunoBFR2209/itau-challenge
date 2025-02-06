@@ -6,9 +6,17 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -16,71 +24,79 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-@ExtendWith(MockitoExtension.class)
+@WebMvcTest(LocationController.class)
 public class LocationControllerTest {
 
-    @InjectMocks
-    private LocationController locationController;
+    @Autowired
+    private MockMvc mockMvc;
 
-    @Mock
+    @MockBean
     private LocationService locationService;
 
     @Test
-    void findPetLocation_withLocation_returnsOk() {
+    public void shouldReturnLocationSuccess() throws Exception {
         double latitude = 10.0;
         double longitude = 20.0;
-        LocationResponseDTO locationResponseDTO = loadMock();
-        when(locationService.findPetLocation(latitude, longitude)).thenReturn(Optional.of(locationResponseDTO));
+        LocationResponseDTO locationResponseDTO = new LocationResponseDTO();
 
-        ResponseEntity<LocationResponseDTO> response = locationController.findPetLocation(null, latitude, longitude, null);
+        Mockito.when(locationService.findPetLocation(latitude, longitude))
+                .thenReturn(Optional.of(locationResponseDTO));
 
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(locationResponseDTO, response.getBody());
-    }
-
-    @Test
-    void findPetLocation_noLocation_returnsNoContent() {
-        double latitude = 10.0;
-        double longitude = 20.0;
-        when(locationService.findPetLocation(latitude, longitude)).thenReturn(Optional.empty());
-
-        ResponseEntity<LocationResponseDTO> response = locationController.findPetLocation(null, latitude, longitude, null);
-
-        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
-    }
-
-    @Test
-    void findPetLocation_withSensorId_shouldNotAffectResult() {
-
-        double latitude = 10.0;
-        double longitude = 20.0;
-        String sensorId = "123"; // Example sensor ID
-        LocationResponseDTO locationResponseDTO = loadMock();
-        when(locationService.findPetLocation(latitude, longitude)).thenReturn(Optional.of(locationResponseDTO));
-
-        ResponseEntity<LocationResponseDTO> response = locationController.findPetLocation(sensorId, latitude, longitude, null);
-
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(locationResponseDTO, response.getBody());
+        mockMvc.perform(MockMvcRequestBuilders.get("/v1/location")
+                        .param("latitude", String.valueOf(latitude))
+                        .param("longitude", String.valueOf(longitude))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
 
     @Test
-    void findPetLocation_withDateTime_shouldNotAffectResult() {
+    public void shouldReturnLocationNotFound() throws Exception {
         double latitude = 10.0;
         double longitude = 20.0;
-        LocalDateTime dateTime = LocalDateTime.now(); // Example date and time
-        LocationResponseDTO locationResponseDTO = loadMock();
-        when(locationService.findPetLocation(latitude, longitude)).thenReturn(Optional.of(locationResponseDTO));
+        Mockito.when(locationService.findPetLocation(latitude, longitude))
+                .thenReturn(Optional.empty());
 
-        ResponseEntity<LocationResponseDTO> response = locationController.findPetLocation(null, latitude, longitude, dateTime);
-
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(locationResponseDTO, response.getBody());
+        mockMvc.perform(MockMvcRequestBuilders.get("/v1/location")
+                        .param("latitude", String.valueOf(latitude))
+                        .param("longitude", String.valueOf(longitude))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isNoContent());
     }
 
-    public LocationResponseDTO loadMock(){
-        return LocationResponseDTO.builder().build();
+
+    @Test
+    public void shouldReturnLocationBadRequest() throws Exception {
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/v1/location")
+                        .param("latitude", "abc")
+                        .param("longitude", "20.0")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/v1/location")
+                        .param("latitude", "10.0")
+                        .param("longitude", "xyz")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
+    @Test
+    public void shouldUseDataIdSensor() throws Exception {
+        double latitude = 10.0;
+        double longitude = 20.0;
+        String sensorId = "sensor123";
+        LocalDateTime dateTime = LocalDateTime.now();
+
+        Mockito.when(locationService.findPetLocation(latitude, longitude))
+                .thenReturn(Optional.of(new LocationResponseDTO()));
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/v1/location")
+                        .param("latitude", String.valueOf(latitude))
+                        .param("longitude", String.valueOf(longitude))
+                        .param("sensorId", sensorId)
+                        .param("dateTime", dateTime.toString())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 }
-

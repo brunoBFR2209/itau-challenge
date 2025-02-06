@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.challenge.pet.love.infra.clients.PositionStackClientTest
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.583 s -- in com.challenge.pet.love.infra.clients.PositionStackClientTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.236 s - in com.challenge.pet.love.infra.clients.PositionStackClientTest
