@@ -28,10 +28,10 @@ public class LocationController {
             @ApiResponse(responseCode = "500", description = "Integration failed")
     })
     @GetMapping
-    public ResponseEntity<LocationResponseDTO> findPetLocation(@RequestParam(required = false) String sensorId,
+    public ResponseEntity<LocationResponseDTO> findPetLocation(@RequestParam String sensorId,
                                                         @RequestParam double latitude,
                                                         @RequestParam double longitude,
-                                                        @RequestParam(required = false) LocalDateTime dateTime
+                                                        @RequestParam LocalDateTime dateTime
                                                 ) {
 
         return locationService.findPetLocation(latitude, longitude)
